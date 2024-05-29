@@ -1,24 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useReducer } from "react";
+
+
+import { ProductList } from "./components/ProductList";
+// import ProductListClass from "./components/ProductListClass";
+import Cart from "./components/Cart";
+import NavBar from "./components/ mui/NavBar";
+import CircularIndeterminate from "./components/ mui/Spinner";
+import ProductInfo from "./components/ProductInfo";
+import AddProduct from "./components/AddProduct";
+import Login from "./components/Login";
+import { GlobalContext } from "./components/utils/globalStateContext";
+import globalReducer from "./components/reducers/globalReducer";
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true)
+  const [selectedItem, setSelectedItem] = useState(null)
+
+  const initialState = {
+    loggedInUserName: '',
+    token: ''
+  }
+
+  const [store, dispatch] = useReducer(globalReducer, initialState)
+
+  function setItem(item) {
+    setSelectedItem(item)
+  }
+
+  setTimeout(() => {
+    setIsLoading(false)
+  }, 2000)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    {isLoading === true ? <CircularIndeterminate />: 
+        <div className="App">
+        <GlobalContext.Provider value={{store, dispatch}}>
+        <NavBar />
+        <Login />
+        <ProductList setItem={setItem}/>
+        <ProductInfo item ={selectedItem}/>
+        <AddProduct />
+        <Cart />
+        </GlobalContext.Provider>
+      </div>}
+    </>
   );
 }
 
