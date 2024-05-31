@@ -17,7 +17,7 @@ function NavBar() {
     },
   ];
 
-  const { store } = useGlobalContext()
+  const { store, dispatch } = useGlobalContext()
 
   return (
     <AppBar position="static">
@@ -38,6 +38,19 @@ function NavBar() {
             })}
           </Box>
           {store.loggedInUsername}
+          {store.loggedInUsername && (
+            <button 
+            onClick={() => {
+              dispatch({
+                type: 'setToken',
+                data: null
+              })
+              dispatch({
+                type: "setLoggedInUsername",
+                data: null
+              })
+            }}>Logout</button>
+          )}
         </Toolbar>
       </Container>
     </AppBar>

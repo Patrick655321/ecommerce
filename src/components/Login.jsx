@@ -31,7 +31,7 @@ function Login() {
         apiError: null
     })
 
-    const [userFetched, setUserFetched] = useState(false)
+    // const [userFetched, setUserFetched] = useState(false)
 
     //GLOBALSTATE
     const {store, dispatch } = useGlobalContext()
@@ -65,7 +65,7 @@ function Login() {
         axios.post("/auth/login", user)
         .then((res) => res.data)
         .then((json) => {
-            setUserFetched(true)
+            // setUserFetched(true)
             // localStorage.setItem("token", json.token) //STORING TOKEN FROM LOGIN!
             dispatch({
                 type: 'setToken',
@@ -98,7 +98,7 @@ function Login() {
     }
     return (
         <>
-        {userFetched ? 
+        {store.loggedInUsername ? 
         <Title>Logged In</Title> :
         <div>
             <Title>Login</Title>

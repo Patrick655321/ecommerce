@@ -1,4 +1,4 @@
-import { useState, useReducer } from "react";
+import { useEffect, useState, useReducer } from "react";
 
 
 import { ProductList } from "./components/ProductList";
@@ -30,6 +30,21 @@ function App() {
   setTimeout(() => {
     setIsLoading(false)
   }, 2000)
+
+  useEffect(()=> {
+    const username = localStorage.getItem("username")
+    const token = localStorage.getItem("token")
+    if(username && token) {
+      dispatch({
+        type: 'setLoggedInUsername',
+        data: username
+      })
+      dispatch({
+        type: 'setToken',
+        data: token
+      })
+    }
+  }, [])
 
   return (
     <>
