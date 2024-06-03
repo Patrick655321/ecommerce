@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import { AppBar, Box, Button, Container, Toolbar } from "@mui/material";
 import { useGlobalContext } from "../utils/globalStateContext";
 
@@ -5,15 +7,15 @@ function NavBar() {
   const navBarItems = [
     {
       title: "Products",
-      id: "#products",
+      linkTo: "/",
     },
     {
       title: "Add Product",
-      id: "#addProduct",
+      linkTo: "products/add",
     },
     {
       title: "Cart",
-      id: "#cart",
+      linkTo: "cart",
     },
   ];
 
@@ -26,14 +28,14 @@ function NavBar() {
           <Box sx={{ flexGrow: 1, display: "flex" }}>
             {navBarItems.map((item) => {
               return (
-                <a style={{ textDecoration: "none" }} 
-                href={item.id} key={item.title}>
+                <Link style={{ textDecoration: "none" }} 
+                to={item.linkTo} key={item.title}>
                   <Button sx={{ my: 2,
                      color: "white",
                       display: "block" }}>
                     {item.title}
                   </Button>
-                </a>
+                </Link>
               );
             })}
           </Box>
