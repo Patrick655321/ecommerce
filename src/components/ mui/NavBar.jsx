@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { AppBar, Box, Button, Container, Toolbar } from "@mui/material";
 import { useGlobalContext } from "../utils/globalStateContext";
@@ -20,6 +20,7 @@ function NavBar() {
   ];
 
   const { store, dispatch } = useGlobalContext()
+  const navigate = useNavigate()
 
   return (
     <AppBar position="static">
@@ -40,7 +41,7 @@ function NavBar() {
             })}
           </Box>
           {store.loggedInUsername}
-          {store.loggedInUsername && (
+          {store.loggedInUsername ? (
             <button 
             onClick={() => {
               dispatch({
@@ -52,6 +53,10 @@ function NavBar() {
                 data: null
               })
             }}>Logout</button>
+          ) : (
+            <button onClick= {() => {
+              navigate("login")
+            }}>Login</button>
           )}
         </Toolbar>
       </Container>
