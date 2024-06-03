@@ -1,5 +1,11 @@
 import { useEffect, useState, useReducer } from "react";
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider, Outlet } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+  Outlet,
+} from "react-router-dom";
 
 import { ProductList } from "./components/ProductList";
 // import ProductListClass from "./components/ProductListClass";
@@ -63,11 +69,13 @@ function App() {
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<MainPage/>}>
+    <Route path="/" element={<MainPage />}>
       <Route path="login" element={<Login />} />
+      <Route path="products/add" element={<AddProduct />} />
+      <Route path="cart" element={<Cart />} />
     </Route>
   )
-)
+);
 
 function MainPage() {
   const [selectedItem, setSelectedItem] = useState(null);
