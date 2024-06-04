@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import Button from "./styled/Button";
-import { useGlobalContext } from "./utils/globalStateContext";
+// import { useGlobalContext } from "./utils/globalStateContext";
 
 const Wrapper = styled.div`
   border-radius: 10px;
