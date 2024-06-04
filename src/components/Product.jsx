@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 
@@ -34,6 +35,7 @@ function Product(props) {
   const item = props.productInfo;
   const [itemOnCart, setItemOnCart] = useState(0);
 
+  const navigate = useNavigate()
   // function handleAddToCart() {
   //   setItemOnCart(itemOnCart + 1)
   // } this is ASYNC so deconstruct it to arrow function to avoid errors
@@ -47,7 +49,8 @@ function Product(props) {
 
   return (
     <Wrapper onClick={() => {
-      props.setItem(item)
+      // props.setItem(item)
+      navigate(`product/${item.id}`)
     }}>
       {" "}
       <img
